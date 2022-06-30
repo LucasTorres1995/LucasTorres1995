@@ -1,0 +1,13 @@
+import socket
+
+portas = [21, 23, 80, 443, 8080]
+
+for portas in portas
+    cliente = socket.socket(socket.AF_INET, socket. SOCK_STREAM]
+    cliente.settimeout(0.5)
+    codigo = cliente.connect_ex(('DOMINIO.COM', porta))
+    if codigo == 0:
+        print porta, "OPEN"
+
+//NMAP PYTHON//
+// NO LUGAR DO DOMINIO COLOCAR O SITE OU IP//

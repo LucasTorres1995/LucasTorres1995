@@ -1,0 +1,40 @@
+Tutorial GIT
+
+1° Criar uma pasta
+2° Criar "git bash here" com botão direito
+3° Digitar no comando da GIT "Git Init" será criado uma pasta oculta
+4° "git status" irá verificar se há algum arquivo não colocado no controle de versão
+5° "git add" + "NOME DO ARQUIVO"
+6° "git add ." adiciona TODOS os arquivos no controle de versão
+7° "git commit -m "commit inicial"
+8° configurar o git no computador
+	
+	git commit -m "commit inicial"
+	"git config --global user.email "EMAIL"
+	"git config --global user.name  "NOME"
+
+9° enviar arquivos para nuvem "git remote add origin" + "o link do repositório criado no github"
+
+10°  "git push --set-upstream origin master" acessar o login no github na janela aberta
+11°  após modificar um código, tem que adicionar novamente no git "git add ." ou git add "nome do arquivo""
+12° para subir o arquivo "git commit -m" + "nome para atualizar o arquivo"
+13° para enviar para o controle de versão comando "git push"
+14° verificar historio de versoes "git reflog"
+15° caso queira voltar a função anterior utilizar "git reset --hard" + "codigo da versao" 
+16° verificar branch "git branch"
+17° criar branch "git branch" + "nome da branch"
+18° mudar a branch utilizada " git checkout" + "nome da branch"
+19° "git pull" puxa as atualizações do servidor para a maquina
+
+20° unir as branch "git checkout" + "branch que quer colocar os novos dados" 
+			"git merge" + "nome da branch que quer puxar os dados"
+
+21° git checkout -b "nome da nova branch" + " nome da branch da qual quer puxar os dados" (cria uma nova branch baseada em outra)
+22° touch .gitignore (criar um arquivo onde colocará os nomes dos arquivos que nao quer mostrar)
+23° importante subir o git ignore 
+	GIT ADD . 
+	GIT STATUS
+	GIT COMMIT -M "NOME DA ALTERAÇÃO"
+	GIT PUSH 
+
+
