@@ -64,7 +64,7 @@ FROM Person.EmailAddress
 WHERE BusinessEntityID = 26 
 
 
----------COUNT
+---------COUNT Essa funcao retorna o numero de itens encontrados em um grupo
 
 SELECT count(*)
 FROM person.Person
@@ -85,7 +85,7 @@ SELECT *
 FROM production.Product
 WHERE listprice BETWEEN 1000 and 2000;
 
---- NOT BETWEEN (BUSCA VALORES QUE NAO ESTÃO ENTRE VALORES SELECIONADOS)
+--- NOT BETWEEN (BUSCA VALORES QUE NAO ESTAO ENTRE VALORES SELECIONADOS)
 
 SELECT *
 FROM production.Product
@@ -131,4 +131,64 @@ MAX -- MAXIMO TOTAL
 AVG -- MEDIA TOTAL
 AS -- NOMEIA A TABELA
 
------------------- GROUP BY
+------------------ GROUP BY (divide o resultade da pesquisa em grupos)
+SELECT coluna1, funcaoagredacao(coluna2)
+FROM nometabela
+GROUP BY coluna1;
+
+
+--------------- HAVING filtra resultados de um agrupamento do GROUP BY
+------- DIFERENCA ENTRE WHERE E HAVING: O HAVING É UM METODO DE FILTRAGEM QUE É UTILIZADO PÓS GROUP BY
+SELECT coluna1, funcaoagredacao (coluna2)
+FROM nometabela
+GROUP BY coluna1
+HAVING condicao;
+
+-- DESAFIO
+
+SELECT ProductID, AVG (linetotal) AS "media"
+FROM Sales.SalesOrderDetail
+GROUP BY ProductID
+HAVING AVG (linetotal) < 1000000
+ORDER BY MEDIA desc
+
+---------------- AS (RE nomeacao)
+SELECT coluna1 AS "alterar nome da coluna"
+FROM tabela
+
+--- ou
+SELECT condicao (coluna) AS (alteracao nome da coluna)
+FROM tabela
+
+---- desafio 1
+SELECT FirstName AS "Nome", lastname AS "Sobrenome"
+FROM Person.Person
+
+---- desafio 2
+SELECT productnumber AS "Nome do produto"
+FROM Production.Product
+
+---- desafio 3
+SELECT UnitPrice AS "preço unitario"
+FROM Sales.SalesOrderDetail
+
+
+----------------- JOIN (JUNTA INFORMAÇÕES DE TABELAS)
+--3 PRINCIPAIS: INNER JOIN, OUTER JOIN E SELF-JOIN 
+INNER JOIN -- QUANDO NECESSITAR JUNTAR DADOS DE DUAS TABELAS DIFERENTES, DEVE-SE ENCONTRAR A COLUNA EM COMUM
+-- EX: ENCONTRAR NOME, SOBRENOME E EMAIL
+-- ABRIR:
+SELECT *
+FROM Person.Person
+-- VAI ENCONTRAR NOME, SOBRENOME
+
+SELECT *
+FROM Person.EmailAddress
+-- VAI ENCONTRAR O EMAIL 
+-- VAI ENCONTRAR A COLUNA EM COMUM (QUE TENHA NAS DUAS TABELAS), NESTE CASO É A BusinessEntityID
+
+-- FAZENDO A UNÇÃO 
+
+SELECT P.LastName, P.FirstName, PE.EmailAddress
+FROM Person.Person AS P  -- FAZER A RENOMEAÇAO DA TABELA FACILITA NA HORA DE COLOCAR O SELECT 
+INNER JOIN Person.EmailAddress AS PE on PE.BusinessEntityID = P.BusinessEntityID
