@@ -260,9 +260,9 @@ WHERE A.Discount = B.Discount
 -- TAMANHO VARIAVEIS -- VARCHAR OU NVARCHAR PERMITE INSERIR ATE UMA QUANTIDADE DEFINIDA, POREM SÓ USA O ESPAÇO QUE FOR PREENCHIDO
 -- NUMEROS --
 -- VALORES EXATOS
--- TINYINT - NÃO TEM VALOR FRACIONADO (EX: 1.43, 24.23) SOMENTE 1,1 , 1,2 , 1,63
+-- TINYINT - NÃO TEM VALOR FRACIONADO (EX: 1,43, 24,23) SOMENTE 1,1 , 1,2 , 1,63
 -- SMALLINT -- MESMA COISA POREM TEM LIMITE MAIOR 
--- INT -- LIMITE MENOR]
+-- INT -- LIMITE MENOR
 -- BIGINT -- MESMA COISA, MAS LIMITE MAIOR
 -- NUMERIC OU DECIMAL - VALORES EXATOS, POREM PERMITE TER PARTE FRACIONADOS, QUE TAMBEM PODE SER ESPECIFICADO A PRECISAO E ESCALA (ESCALA É O NUMERO DE DIGITOS NA PARTE FRACIONAL) -- EX: NUMERIC (5,2) 113,44 (O NUMERO 2 INFORMA QUANTO NUMEROS POSSUI PÓS VIRGULA)
 
@@ -277,3 +277,76 @@ WHERE A.Discount = B.Discount
 -- SWALLDATETIME -- DATA E HORA NOS RESPEITANDO O LIMITE ENTRE '1900-01-01:00:00:00' ATÉ '2079-06-06:23:59:59'
 -- TIME -- HORAS, MINUTOS, SEGUNDOS E MILISEGUNDOS
 -- DATETIMEOFFSET -- PERMITE ARMAZENAR INFORMAÇÕES DE DATA E HORA INCLUINDO O FUSO HORARIO
+
+
+--------------------CREATE TABLE
+CREATE TABLE nomeTabela (
+coluna1 tipo restricaoDaColuna,
+coluna2 tipo restricaoDaColuna,
+coluna3 tipo restricaoDaColuna,
+);
+-- restrição da coluna não é obrigado a existir
+-- TIPOS DE RESTRIÇÃO
+--NOT NULL - não permite nulos
+--UNIQUE - Força que todos os valores em um coluna sejam diferentes 
+--PRIMARY KEY - uma junção de NOT NULL e UNIQUE
+--FOREIGN KEY - identifica unicamente uma linha em outra tabela
+--CHECK - Força uma condicao especifica em uma coluna
+--DEFAULT - forca um valor padrao quando nenhum valor é passado
+
+-- EX -- NA SEGUNDA TABELA FOI CRIADO A COLUNA CANALID COM REFERENCIA A COLUNA DA PRIMEIRA TABELA CRIADA
+CREATE TABLE Canal (
+CanalID INT PRIMARY KEY,
+Nome VARCHAR(150) NOT NULL,
+ContagemInscritos INT DEFAULT 0,
+DataCriacao DATETIME NOT NULL
+);
+
+CREATE TABLE Video (
+VideoID INT PRIMARY KEY,
+Nome VARCHAR(150) NOT NULL,
+Visualizacoes INT DEFAULT 0,
+Likes INT DEFAULT 0,
+Dislikes INT DEFAULT 0,
+Duracao INT NOT NULL,
+CanalID INT FOREIGN KEY REFERENCES Canal(CanalID)
+);
+
+
+---------------------------------------------------- INSERT INTO
+INSERT INTO nomeTabela(coluna1,coluna2....)
+VALUES (valor1, valor2),
+VALUES (valor1, valor2),
+VALUES (valor1, valor2),
+VALUES (valor1, valor2);
+
+
+---- PARA INSERIR A MESMA INFORMAÇÃO EM OUTRA TABELA
+INSERT INTO Tabela1 (coluna1)
+SELECT coluna2
+FROM tabela2
+
+---- COPIAR DADOS DE UMA TABELA PARA A OUTRA
+SELECT * INTO nometabela FROM nometabela -- (a 2° tabela (FROM) é de onde os arquivos estao sendo copiados)
+
+
+
+---------- UPDATE (serve para atualizar linhas de um banco de dados)
+UPDATE nometabela
+SET coluna1 = 'valor1'
+    coluna2 = 'valor2'
+WHERE condicao;
+
+------------------DELETE (IMPORTANTE COLOCAR A CONDICAO PARA NAO APAGAR TUDO)
+DELETE FROM nometabela
+WHERE nome = INFORMAÇÃO
+
+------------------ ALTER TABLE
+-- EXEMPLOS DO QUE PODE SER FEITO:
+-- ADD, REMOVER, OR ALTERAR UMA COLUNA
+-- SETAR VALORES PADROES PARA UMA COLUNA
+-- ADD OU REMOVER RESTICOES DE UMA COLUNA
+-- RENOMEAR UMA TABELA
+
+ 
+
